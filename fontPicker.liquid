@@ -1,0 +1,53 @@
+{%- liquid
+  assign heading_font = section.settings['heading-font']
+  assign para_font = section.settings['para-font']
+  assign heading_text = section.settings['heading-text']
+-%}
+<style>
+  {{heading_font |font_face }}
+  {{para_font | font_face}}
+
+  .heading-div h2{
+    font-family:{{heading_font.family}}, {{heading_font.fallback_families}};
+  }
+
+  .heading-div p{
+    font-family:{{para_font.family}}, {{para_font.fallback_families}};
+  }
+</style>
+
+<div class="heading-div">
+  <h2 class="font_Picker">{{ heading_text }}</h2>
+  <p>Manthan Gedam Is A Shopify Developer At VowelWeb</p>
+</div>
+
+{% schema %}
+{
+  "name": "Font Picker",
+  "settings": [
+    {
+      "type": "font_picker",
+      "id": "heading-font",
+      "label": "Heading Font Family",
+      "default":"helvetica_n4"
+    },{
+      "type": "font_picker",
+      "id": "para-font",
+      "label": "Para Font Family",
+      "default":"helvetica_n4"
+    },{
+      "type": "text",
+      "id": "heading-text",
+      "label": "Heading",
+      "default":"Hello Manthan Gedam"
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Font Picker"
+    }
+  ]
+
+}
+{% endschema %}
