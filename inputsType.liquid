@@ -1,0 +1,105 @@
+<style>
+  h1{
+    padding-top:{{section.settings.padding_top}}rem;
+    font-size:{{section.settings.headingFont}}px;
+  }
+</style>
+<div class="page-width">
+  {{ section.settings['radio-btn'] }}
+  {% if section.settings.show_heading == true %}
+    <h1 style="text-align:{{ section.settings.heading_align }};">{{ section.settings['heading-text'] }}</h1>
+  {% endif %}
+  <!-- Para section.setting.uniqueID -->
+  <p>
+    {{ section.settings.paratext }}
+  </p>
+  <!-- Number -->
+  {% if section.settings.mynumber >= 10 %}
+    <p>{{ section.settings.mynumber }}</p>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "fristSection",
+  "settings": [{
+    "type": "text",
+    "id":"heading-text",
+    "label":"Heading"
+  },{
+    "type": "textarea",
+    "id": "paratext",
+    "label": "Paragraph",
+    "default":"Tell Your Self Here"
+  },
+  {
+    "type": "number",
+    "id": "mynumber",
+    "label": "Numbers"
+  },{
+    "type": "range",
+    "id": "padding_top",
+    "label": "Padding_Top",
+    "min": 1,
+    "max": 50,
+    "step": 1,
+    "unit": "rem",
+    "default":2
+  },
+  {
+    "type": "range",
+    "id": "headingFont",
+    "label": "Heading Font Size",
+    "min": 1,
+    "max": 50,
+    "step": 1,
+    "unit": "px",
+    "default":1,
+  },
+  {
+    "type": "select",
+    "id": "heading_align",
+    "label": "Heading Align",
+    "options": [
+      {
+      "value": "left",
+      "label": "Left Align"
+    },
+      {
+      "value": "center",
+      "label": "Center Align"
+    },{
+        "value": "right",
+        "label": "Right Align"
+    }
+    ],
+    "default":"center"
+  },
+  {
+    "type": "checkbox",
+    "id": "show_heading",
+    "label": "Show Heading",
+    "default":false
+  },
+    {
+      "type": "radio",
+      "id": "radio-btn",
+      "label": "Radio Button",
+      "options": [
+        {
+          "value": "Yes",
+          "label": "Good"
+        },
+        {
+          "value": "NO",
+          "label": "Bad"
+        }
+      ]
+    }
+  ],
+  "blocks": [],
+  "presets": [{
+    "name": "fristSection"
+  }]
+}
+{% endschema %}
