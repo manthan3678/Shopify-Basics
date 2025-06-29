@@ -1,6 +1,6 @@
 # Shopify-Basics
 
-# When There Is A Need Of basics You Can Go Through The Repo Which Contains Basic Liquid Coding Using Examples and Practiced Custom Section;
+## When There Is A Need Of basics You Can Go Through The Repo Which Contains Basic Liquid Coding Using Examples and Practiced Custom Section;
 
 # Liquid_Template_Language
 
