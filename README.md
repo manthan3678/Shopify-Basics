@@ -1,5 +1,7 @@
 # Shopify-Basics
 
+# When There Is A Need Of basics You Can Go Through The Repo Which Contains Basic Liquid Coding Using Examples and Practiced Custom Section;
+
 # Liquid_Template_Language
 
 This repository is designed as a personal resource for practicing and reviewing Shopify development concepts, with a focus on the Liquid template language. It contains code samples, practical exercises, and reference materials to help you understand and implement Shopify basics effectively.

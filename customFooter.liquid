@@ -1,0 +1,201 @@
+{% comment %} All The Sections are For Review and Understanding Basic When There is A Need {% endcomment %}
+ {% comment %}
+  Custom Footer Section with Texture Background, FontAwesome Icons, and Dynamic Page Links
+{% endcomment %}
+
+<section class="custom-footer-section">
+  <div class="footer-overlay"></div>
+<div class="page-width"> 
+  <div class="custom-footer-container">
+    <div class="custom-footer-top">
+      <div class="custom-footer-block">
+        <h3 class="custom-footer-title">Basically Kids</h3>
+        <p class="custom-footer-desc">
+          At <strong>Basically</strong>, we believe that comfort and sustainability go hand in hand. Our brand focuses on providing eco-friendly baby clothing made from soft, breathable bamboo fiber, ensuring that your little one stays cozy and happy all day long. We are committed to creating high-quality, stylish pieces that are gentle on both your baby’s skin and the planet…
+        </p>
+        <div class="custom-footer-social-icons">
+          <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p class="custom-footer-copy">&copy; {{ "now" | date: "%Y" }}, Basically | All Right Reserved.</p>
+      </div>
+
+      <div class="custom-footer-block inner-padding">
+        <h4>Menu Links</h4>
+        <ul>
+          {% for link in section.settings.menu_links.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="custom-footer-block inner-padding">
+        <h4>Our Policies</h4>
+        <ul>
+          {% for link in section.settings.policy_links.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="custom-footer-block inner-padding">
+        <h4>Quick Links</h4>
+        <ul>
+          {% for link in section.settings.quick_links.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="custom-footer-logo">
+      <img src="{{ section.settings.footer_logo | image_url }}" alt="Basically Kids Logo">
+    </div>
+  </div>
+</div>   
+</section>
+
+<style>
+.custom-footer-section {
+  position: relative;
+  padding: 3rem 0rem;
+  background-color: #FFD366;
+  font-family: 'Cooper Hewitt', sans-serif;
+  text-align: left;
+  z-index: 0;
+}
+.custom-footer-section .footer-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url({{ section.settings.texture_image | image_url }});
+  background-repeat: repeat;
+  opacity: 0.3;
+  z-index: 1;
+}
+.custom-footer-container {
+  position: relative;
+  z-index: 2;
+  /* max-width: 1200px; */
+  /* margin: 0 auto; */
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.custom-footer-top {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1fr;
+  gap: 5rem;
+}
+.custom-footer-container .custom-footer-top .inner-padding{
+    padding:0rem 5rem;
+  }
+
+
+.custom-footer-block h4, .custom-footer-title {
+  font-weight: 400;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #404041;
+}
+.custom-footer-desc {
+  font-size: 1.6rem;
+  font-family: 'Trebuchet MS', sans-serif;
+  font-weight:400;
+  line-height: 24px;
+  margin-bottom: 1rem;
+  color: #404041;
+}
+.custom-footer-social-icons a i{
+  color: #404041;
+  margin-right: 10px;
+  transition: all 0.3s;
+   font-size: 2.1rem;
+    padding-right: 2rem;
+    padding-top: 1.6rem;
+}
+.custom-footer-social-icons a:hover {
+  color: #000;
+}
+.custom-footer-copy {
+  margin-top: 1rem;
+  font-size: 1.6rem;
+    font-family: 'Trebuchet MS', sans-serif;
+  fon-weight:400;
+    color: #404041;
+}
+.custom-footer-block ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.custom-footer-block ul li {
+  margin-bottom: 0.5rem;
+}
+.custom-footer-block ul li a {
+  color: #404041;
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight:400;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+.custom-footer-logo {
+  text-align: center;
+  margin-top: 2rem;
+}
+.custom-footer-logo img {
+  /* max-width: 200px;
+  height: auto; */
+}
+@media(max-width: 768px) {
+  .custom-footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media(max-width: 480px) {
+  .custom-footer-top {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "texture_image",
+      "label": "Texture Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Footer Logo Image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_links",
+      "label": "Menu Links"
+    },
+    {
+      "type": "link_list",
+      "id": "policy_links",
+      "label": "Policy Links"
+    },
+    {
+      "type": "link_list",
+      "id": "quick_links",
+      "label": "Quick Links"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Basically Custom Footer",
+      "category": "Footer"
+    }
+  ]
+}
+{% endschema %}
