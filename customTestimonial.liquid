@@ -1,0 +1,262 @@
+{% schema %}
+{
+  "name": "Testimonials Slider",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "texture_bg",
+      "label": "Texture Background Image"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "TESTIMONIALS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What Our Customer’s Say"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author Image"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name"
+        },
+        {
+          "type": "text",
+          "id": "author_role",
+          "label": "Author Role"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials Slider",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% style %}
+.testimonials-section {
+  background-color: #fcd264;
+  background-image: url({{ section.settings.texture_bg | image_url: width: 800 }});
+  background-repeat: repeat;
+  background-size: auto;
+  padding: 80px 20px;
+  text-align: center;
+  position:relative;
+}
+.testimonials-section .subtitle {
+  font-size: 1.4rem;
+  font-weight:300;
+  font-family: 'CooperHewittMedium';
+  letter-spacing: 4px;
+  text-transform: uppercase;
+
+}
+.testimonials-section .title {
+  font-size: 4rem;
+  font-weight: 400;
+  font-family: 'CooperLTBT', serif;
+  margin-bottom:10px;
+}
+.testimonials-slider {
+  max-width: 800px;
+  margin: 0 auto 40px;
+}
+.slick-slide {
+  min-height: 200px;
+  padding: 10px 30px;
+}
+.quote-icon {
+  font-size: 36px;
+  color: #00a8e8;
+  margin-bottom: 10px;
+  font-family: Georgia, serif;
+  transform: scaleX(-1);
+}
+.quote-text {
+  font-size: 16px;
+  line-height: 30px;
+  color: #404041;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+/* Arrow TExt */
+  div#prev-slide {
+    position: absolute;
+    left: 20%;
+    top: 40%;
+    width: 80px;
+    
+    cursor:pointer;
+}
+  div#next-slide {
+    position: absolute;
+    right: 20%;
+    top: 40%;
+    width: 80px;
+   
+    cursor:pointer;
+}
+.testimonials-authors {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.arrow-prev .prev-text, .arrow-next .next-arrow{
+  text-align:start;
+  font-size:1.6rem;
+  letter-spacing:2px;
+  font-weight:707;
+  }
+ .arrow-prev .prev-arrow, .arrow-next .next-text {
+   text-align:end;
+    font-size:1.6rem;
+   letter-spacing:2px;
+  font-weight:707;
+ } 
+  /*  */
+.testimonial-author {
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+  margin:2rem 0rem;
+}
+.testimonial-author.active {
+  opacity: 1;
+}
+.testimonial-author img {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+.testimonial-author .name {
+  font-weight: 400;
+  font-size: 2.5rem;
+  font-family: 'CooperLTBT', serif;
+  color: #404041;
+}
+.testimonial-author .role {
+  font-size: 1.6rem;
+color: #404041;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+@media (max-width: 768px) {
+  .testimonials-section .title {
+    font-size: 22px;
+  }
+  .testimonials-authors {
+    gap: 30px;
+  }
+}
+{% endstyle %}
+
+<div class="testimonials-section">
+  <div class="subtitle">{{ section.settings.subtitle }}</div>
+  <div class="title">{{ section.settings.title }}</div>
+
+  <div class="testimonials-slider" id="testimonial-slider">
+    {% for block in section.blocks %}
+      <div class="testimonial-slide" data-index="{{ forloop.index0 }}">
+        <div class="quote-icon"><i class="fa-solid fa-quote-right"></i></div>
+        <div class="quote-text">{{ block.settings.quote }}</div>
+      </div>
+    {% endfor %}
+  </div>
+
+
+    <div class="arrow-prev" id="prev-slide">
+      <div class="prev-text">Prev </div>
+        <div class="prev-arrow"> ← </div>       
+      </div>
+    <div class="arrow-next" id="next-slide">
+      <div class="next-arrow"> → </div>
+      <div class="next-text"> Next</div>
+     </div>
+
+  <div class="testimonials-authors">
+    {% for block in section.blocks %}
+      <div class="testimonial-author {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
+        {% if block.settings.author_image %}
+          <img src="{{ block.settings.author_image | image_url: width: 100 }}" alt="{{ block.settings.author_name }}">
+        {% endif %}
+        <div class="name">
+        {{ block.settings.author_name }}
+       <div class="role">{{ block.settings.author_role }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const $slider = $('#testimonial-slider');
+    const $authors = document.querySelectorAll('.testimonial-author');
+
+    $slider.slick({
+      dots: false,
+      arrows: false,
+      infinite: true,
+      speed: 500,
+      fade: true,
+      cssEase: 'ease-in-out',
+    });
+
+    $('#prev-slide').on('click', function () {
+      $slider.slick('slickPrev');
+    });
+
+    $('#next-slide').on('click', function () {
+      $slider.slick('slickNext');
+    });
+
+    $slider.on('afterChange', function (event, slick, currentSlide) {
+      $authors.forEach((el, i) => {
+        el.classList.toggle('active', i === currentSlide);
+      });
+    });
+
+    $authors.forEach((author) => {
+      author.addEventListener('click', function () {
+        const index = parseInt(this.getAttribute('data-index'));
+        $slider.slick('slickGoTo', index);
+      });
+    });
+  });
+</script>
