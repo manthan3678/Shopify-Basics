@@ -1,0 +1,318 @@
+{% schema %}
+{
+  "name": "ShopKids",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Static Image"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "View All Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_block",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge Text"
+        },
+        {
+          "type": "color",
+          "id": "badge_color",
+          "label": "Badge Color",
+          "default": "#F27258"
+        },
+        {
+          "type": "select",
+          "id": "collection_tag",
+          "label": "Collection Key",
+          "default": "infant",
+          "options": [
+            { "value": "infant", "label": "Infant" },
+            { "value": "boys", "label": "Boys" },
+            { "value": "girls", "label": "Girls" },
+            { "value": "new_arrivals", "label": "New Arrivals" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "ShopKids",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
+<section class="bk-section">
+  <div class="page-width bk-head">
+    <div class="bk-heading-section">
+      <h2 class="bk-title">Shop Basically Kids</h2>
+      <p class="bk-sub">Our Most Popular Styles Right Now That Your Little One Will Love.</p>
+    </div>
+    <div class="bk-pills">
+      <button class="bk-pill red" data-collection="infant">SHOP INFANT →</button>
+      <button class="bk-pill green" data-collection="boys">SHOP BOYS →</button>
+      <button class="bk-pill blue" data-collection="girls">SHOP GIRLS →</button>
+      <button class="bk-pill yellow" data-collection="new_arrivals">NEW ARRIVALS →</button>
+    </div>
+  </div>
+
+  <div class="page-width bk-grid">
+    <div class="bk-left">
+      <div class="bk-image-box">
+        <img src="{{ section.settings.left_image | img_url: '800x' }}" alt="Static Image" />
+        {% if section.settings.button_link %}
+          <a href="{{ section.settings.button_link }}" class="bk-view-btn">VIEW ALL PRODUCTS →</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="bk-right">
+  <button class="bk-arrow left" onclick="scrollProducts('left')">←</button>
+
+  {% assign tags = 'infant,boys,girls,new_arrivals' | split: ',' %}
+  {% for tag in tags %}
+    <div class="bk-slider-container" id="bkSlider-{{ tag }}" style="{% unless forloop.first %}display: none;{% endunless %}">
+      {% for block in section.blocks %}
+        {% assign p = block.settings.product %}
+        {% if block.settings.collection_tag == tag and p %}
+          <div class="bk-product">
+            <div class="bk-img-wrap">
+              <img src="{{ p.featured_image | img_url: '500x' }}" alt="{{ p.title }}">
+              {% if block.settings.badge %}
+                <span class="bk-badge" style="background-color: {{ block.settings.badge_color }}">{{ block.settings.badge }}</span>
+              {% endif %}
+              <div class="bk-quick">QUICK ADD →</div>
+            </div>
+            <p class="bk-prod-title">{{ p.title }}</p>
+            <p class="bk-price">{{ p.price | money }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endfor %}
+
+  <button class="bk-arrow right" onclick="scrollProducts('right')">→</button>
+</div>
+  </div>
+</section>
+<style>
+.bk-section {
+  padding: 6rem 0;
+}
+.bk-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.bk-title {
+  font-size: 4rem;
+  font-family: 'CooperLTBT', serif;
+  margin-bottom: 1rem;
+}
+.bk-sub {
+  font-size: 1.8rem;
+  font-family: 'Trebuchet MS';
+  margin-bottom: 2rem;
+}
+.bk-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.bk-pill {
+  font-size: 1.6rem;
+  padding: 7px 18px;
+  border-radius: 25px;
+  font-family: 'CooperHewitt-Medium';
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+.bk-pill.red { background: #F27258; }
+.bk-pill.green { background: #6FC072; }
+.bk-pill.blue { background: #6BC3D1; }
+.bk-pill.yellow { background: #FFD273; color: #000; }
+
+.bk-grid {
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  gap: 30px;
+  align-items: stretch;
+  padding-top: 3rem;
+}
+
+.bk-image-box {
+  position: relative;
+  height: 100%;
+}
+.bk-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.bk-view-btn {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  padding: 12px 24px;
+  background: #fff;
+  font-family: 'CooperHewitt-Medium';
+  border: 1px solid #000;
+  border-radius: 30px;
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: #000;
+}
+
+.bk-right {
+  position: relative;
+  overflow: hidden;
+}
+.bk-slider-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+.bk-slider-container::-webkit-scrollbar {
+  display: none;
+}
+
+.bk-product {
+  min-width: 280px;
+  flex: 0 0 auto;
+  text-align: center;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.bk-img-wrap {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+}
+.bk-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.bk-img-wrap:hover img {
+  transform: scale(1.05);
+}
+.bk-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1.4rem;
+  font-family: 'CooperHewitt-Medium';
+  color: #fff;
+  padding: 5px 14px;
+  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+}
+.bk-quick {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFD273;
+  padding: 10px;
+  font-size: 1.6rem;
+  font-family: 'CooperHewitt-Medium';
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  opacity: 0;
+}
+.bk-img-wrap:hover .bk-quick {
+  transform: translateY(0);
+  opacity: 1;
+}
+.bk-prod-title {
+  font-size: 2.2rem;
+  font-family: 'CooperLTBT', serif;
+  margin-top: 15px;
+}
+.bk-price {
+  font-size: 1.8rem;
+  font-family: 'Trebuchet MS';
+  margin: 5px 0 15px;
+}
+
+.bk-arrow {
+  position: absolute;
+  top: 40%;
+  z-index: 10;
+  font-size: 2.4rem;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.bk-arrow.left { left: 10px; }
+.bk-arrow.right { right: 10px; }
+
+@media screen and (max-width: 768px) {
+  .bk-grid {
+    grid-template-columns: 1fr;
+  }
+  .bk-head {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .bk-arrow.left, .bk-arrow.right {
+    top: auto;
+    bottom: -30px;
+  }
+}
+</style>
+<script>
+function scrollProducts(direction) {
+  const activeSlider = document.querySelector('.bk-slider-container:not([style*="display: none"])');
+  const scrollAmount = 320;
+  if (direction === 'left') {
+    activeSlider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  } else {
+    activeSlider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const pills = document.querySelectorAll('.bk-pill');
+  pills.forEach(pill => {
+    pill.addEventListener('click', function () {
+      const target = this.dataset.collection;
+      document.querySelectorAll('.bk-slider-container').forEach(slider => {
+        slider.style.display = 'none';
+      });
+      const activeSlider = document.getElementById(`bkSlider-${target}`);
+      if (activeSlider) {
+        activeSlider.style.display = 'flex';
+      }
+    });
+  });
+});
+</script>
