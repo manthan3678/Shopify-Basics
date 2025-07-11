@@ -1,6 +1,7 @@
 {% schema %}
 {
   "name": "ShopKids",
+  "tag": "section",
   "settings": [
     {
       "type": "image_picker",
@@ -60,86 +61,110 @@
 <section class="bk-section">
   <div class="page-width bk-head">
     <div class="bk-heading-section">
-      <h2 class="bk-title">Shop Basically Kids</h2>
+      <h5 class="bk-title">Shop Basically Kids </h5>
       <p class="bk-sub">Our Most Popular Styles Right Now That Your Little One Will Love.</p>
     </div>
-    <div class="bk-pills">
+    <div class="bk-pills pills-none">
+      <button class="bk-pill red" data-collection="infant">SHOP INFANT <svg class=" icon" style="margin-left:0.5rem" xmlns="http://www.w3.org/2000/svg" width="21" height="10" viewBox="0 0 21 10" fill="none"><path d="M20.7594 4.42915C20.7591 4.42891 20.7589 4.42863 20.7587 4.42839L16.4724 0.234836C16.1512 -0.0793172 15.6319 -0.0781481 15.3122 0.237578C14.9926 0.553264 14.9939 1.06387 15.315 1.37806L18.1928 4.19355H0.820312C0.367254 4.19355 0 4.5546 0 5C0 5.4454 0.367254 5.80645 0.820312 5.80645H18.1928L15.315 8.62194C14.9939 8.93613 14.9927 9.44674 15.3123 9.76242C15.6319 10.0782 16.1513 10.0793 16.4724 9.76516L20.7587 5.57161C20.7589 5.57137 20.7591 5.57109 20.7594 5.57085C21.0807 5.25561 21.0797 4.74335 20.7594 4.42915Z" fill="white"/></svg> </button>
+      <button class="bk-pill green" data-collection="boys">SHOP BOYS <svg class=" icon" style="margin-left:0.5rem" xmlns="http://www.w3.org/2000/svg" width="21" height="10" viewBox="0 0 21 10" fill="none"><path d="M20.7594 4.42915C20.7591 4.42891 20.7589 4.42863 20.7587 4.42839L16.4724 0.234836C16.1512 -0.0793172 15.6319 -0.0781481 15.3122 0.237578C14.9926 0.553264 14.9939 1.06387 15.315 1.37806L18.1928 4.19355H0.820312C0.367254 4.19355 0 4.5546 0 5C0 5.4454 0.367254 5.80645 0.820312 5.80645H18.1928L15.315 8.62194C14.9939 8.93613 14.9927 9.44674 15.3123 9.76242C15.6319 10.0782 16.1513 10.0793 16.4724 9.76516L20.7587 5.57161C20.7589 5.57137 20.7591 5.57109 20.7594 5.57085C21.0807 5.25561 21.0797 4.74335 20.7594 4.42915Z" fill="white"/></svg> </button>
+      <button class="bk-pill blue" data-collection="girls">SHOP GIRLS <svg class=" icon" style="margin-left:0.5rem" xmlns="http://www.w3.org/2000/svg" width="21" height="10" viewBox="0 0 21 10" fill="none"><path d="M20.7594 4.42915C20.7591 4.42891 20.7589 4.42863 20.7587 4.42839L16.4724 0.234836C16.1512 -0.0793172 15.6319 -0.0781481 15.3122 0.237578C14.9926 0.553264 14.9939 1.06387 15.315 1.37806L18.1928 4.19355H0.820312C0.367254 4.19355 0 4.5546 0 5C0 5.4454 0.367254 5.80645 0.820312 5.80645H18.1928L15.315 8.62194C14.9939 8.93613 14.9927 9.44674 15.3123 9.76242C15.6319 10.0782 16.1513 10.0793 16.4724 9.76516L20.7587 5.57161C20.7589 5.57137 20.7591 5.57109 20.7594 5.57085C21.0807 5.25561 21.0797 4.74335 20.7594 4.42915Z" fill="white"/></svg> </button>
+      <button class="bk-pill yellow" data-collection="new_arrivals">NEW ARRIVALS <svg class="icon" style="margin-left:0.5rem;" xmlns="http://www.w3.org/2000/svg" width="21" height="10" viewBox="0 0 21 10" fill="none"><path d="M20.7594 4.42915C20.7591 4.42891 20.7589 4.42863 20.7587 4.42839L16.4724 0.234836C16.1512 -0.0793172 15.6319 -0.0781481 15.3122 0.237578C14.9926 0.553264 14.9939 1.06387 15.315 1.37806L18.1928 4.19355H0.820312C0.367254 4.19355 0 4.5546 0 5C0 5.4454 0.367254 5.80645 0.820312 5.80645H18.1928L15.315 8.62194C14.9939 8.93613 14.9927 9.44674 15.3123 9.76242C15.6319 10.0782 16.1513 10.0793 16.4724 9.76516L20.7587 5.57161C20.7589 5.57137 20.7591 5.57109 20.7594 5.57085C21.0807 5.25561 21.0797 4.74335 20.7594 4.42915Z" fill="#404041"/></svg></button>
+    </div>
+  </div>
+        <!--  -->
+  <div class="bk-grid">
+    <div class="bk-left">
+      <div class="bk-image-box">
+        <img src="{{ section.settings.left_image | img_url: '800x' }}" alt="Static Image" />
+        {% comment %}
+                {{ section.settings.left_image | image_url: width: 800 | image_tag: alt: 'Static Image' }}
+        {% endcomment %}
+        {% if section.settings.button_link %}
+          <a href="{{ section.settings.button_link }}" class="bk-view-btn">VIEW ALL PRODUCTS <span class="bk-view-btn-arrow" style="margin-left:0.5rem;"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="10" viewBox="0 0 21 10" fill="none"><path d="M20.7594 4.42915C20.7591 4.42891 20.7589 4.42863 20.7587 4.42839L16.4724 0.234836C16.1512 -0.0793172 15.6319 -0.0781481 15.3122 0.237578C14.9926 0.553264 14.9939 1.06387 15.315 1.37806L18.1928 4.19355H0.820312C0.367254 4.19355 0 4.5546 0 5C0 5.4454 0.367254 5.80645 0.820312 5.80645H18.1928L15.315 8.62194C14.9939 8.93613 14.9927 9.44674 15.3123 9.76242C15.6319 10.0782 16.1513 10.0793 16.4724 9.76516L20.7587 5.57161C20.7589 5.57137 20.7591 5.57109 20.7594 5.57085C21.0807 5.25561 21.0797 4.74335 20.7594 4.42915Z" fill="#404041"/></svg></span></a>
+        {% endif %}
+      </div>
+    </div>
+
+    <!--Mobile view Button Start  -->
+    <div class="bk-pills mobile-view-pills">
       <button class="bk-pill red" data-collection="infant">SHOP INFANT →</button>
       <button class="bk-pill green" data-collection="boys">SHOP BOYS →</button>
       <button class="bk-pill blue" data-collection="girls">SHOP GIRLS →</button>
       <button class="bk-pill yellow" data-collection="new_arrivals">NEW ARRIVALS →</button>
     </div>
-  </div>
-
-  <div class="page-width bk-grid">
-    <div class="bk-left">
-      <div class="bk-image-box">
-        <img src="{{ section.settings.left_image | img_url: '800x' }}" alt="Static Image" />
-        {% if section.settings.button_link %}
-          <a href="{{ section.settings.button_link }}" class="bk-view-btn">VIEW ALL PRODUCTS →</a>
-        {% endif %}
-      </div>
-    </div>
-
+    <!--Mobile View Buttons End  -->
+    
     <div class="bk-right">
-  <button class="bk-arrow left" onclick="scrollProducts('left')">←</button>
+      <button class="bk-arrow left" onclick="scrollProducts('left')">←</button>
 
-  {% assign tags = 'infant,boys,girls,new_arrivals' | split: ',' %}
-  {% for tag in tags %}
-    <div class="bk-slider-container" id="bkSlider-{{ tag }}" style="{% unless forloop.first %}display: none;{% endunless %}">
-      {% for block in section.blocks %}
-        {% assign p = block.settings.product %}
-        {% if block.settings.collection_tag == tag and p %}
-          <div class="bk-product">
-            <div class="bk-img-wrap">
-              <img src="{{ p.featured_image | img_url: '500x' }}" alt="{{ p.title }}">
-              {% if block.settings.badge %}
-                <span class="bk-badge" style="background-color: {{ block.settings.badge_color }}">{{ block.settings.badge }}</span>
-              {% endif %}
-              <div class="bk-quick">QUICK ADD →</div>
-            </div>
-            <p class="bk-prod-title">{{ p.title }}</p>
-            <p class="bk-price">{{ p.price | money }}</p>
-          </div>
-        {% endif %}
+      {% assign tags = 'infant,boys,girls,new_arrivals' | split: ',' %}
+      {% for tag in tags %}
+        <div class="bk-slider-container" id="bkSlider-{{ tag }}" style="{% unless forloop.first %}display: none;{% endunless %}">
+          {% for block in section.blocks %}
+            {% assign p = block.settings.product %}
+            {% if block.settings.collection_tag == tag and p %}
+              <div class="bk-product" data-product-handle="{{ p.handle }}">
+                <a href="{{ p.url }}">
+                  <div class="bk-img-wrap">
+                    <img src="{{ p.featured_image | img_url: '480x' }}" alt="{{ p.title }}">
+                    {% if block.settings.badge %}
+                      <span class="bk-badge" style="background-color: {{ block.settings.badge_color }}">{{ block.settings.badge }}</span>
+                    {% endif %}
+                    <div class="bk-quick" onclick="event.preventDefault(); event.stopPropagation(); addToCart('{{ p.variants.first.id }}')">QUICK ADD →</div>
+                  </div>
+                </a>
+                <p class="bk-prod-title">{{ p.title }}</p>
+                <p class="bk-price">{{ p.price | money }}</p>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
       {% endfor %}
-    </div>
-  {% endfor %}
 
-  <button class="bk-arrow right" onclick="scrollProducts('right')">→</button>
-</div>
+      <button class="bk-arrow right" onclick="scrollProducts('right')">→</button>
+    </div>
   </div>
+   
 </section>
 <style>
 .bk-section {
-  padding: 6rem 0;
+  padding: 7rem 0rem 7rem 0rem;
 }
 .bk-head {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
 }
 .bk-title {
   font-size: 4rem;
-  font-family: 'CooperLTBT', serif;
+  font-family: 'CooperLTBTLight', sans-serif !important;
+  font-weight:normal !important;
   margin-bottom: 1rem;
+  margin-top: 0rem !important;
 }
 .bk-sub {
   font-size: 1.8rem;
   font-family: 'Trebuchet MS';
   margin-bottom: 2rem;
 }
+  /*Mobile View Button  */
+  .bk-pills.mobile-view-pills{
+    display:none;
+  }
+  /*Mobile View Button  */
 .bk-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 10px;
+  margin-top: 1rem;
 }
 .bk-pill {
   font-size: 1.6rem;
-  padding: 7px 18px;
-  border-radius: 25px;
-  font-family: 'CooperHewitt-Medium';
+  padding: 14px 26px;
+  border-radius: 30px;
+  font-family: 'CooperHewittMedium', sans-serif !important;
+  font-weight:300 !important;
   color: #fff;
   text-decoration: none;
   cursor: pointer;
@@ -155,7 +180,7 @@
   grid-template-columns: 1fr 2.5fr;
   gap: 30px;
   align-items: stretch;
-  padding-top: 3rem;
+  padding:1.5rem 0rem 2rem 5rem;
 }
 
 .bk-image-box {
@@ -164,18 +189,18 @@
 }
 .bk-image-box img {
   width: 100%;
-  height: 100%;
+  height:98%;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 0px;
 }
 .bk-view-btn {
   position: absolute;
-  bottom: 15px;
-  left: 15px;
+  bottom: 5%;
+  left: 10%;
   padding: 12px 24px;
   background: #fff;
-  font-family: 'CooperHewitt-Medium';
-  border: 1px solid #000;
+  font-family: 'CooperHewittMedium', sans-serif !important;
+  border: none;
   border-radius: 30px;
   font-size: 1.4rem;
   text-decoration: none;
@@ -188,7 +213,7 @@
 }
 .bk-slider-container {
   display: flex;
-  gap: 20px;
+  gap: 25px;
   overflow-x: auto;
   scroll-behavior: smooth;
   padding-bottom: 10px;
@@ -199,11 +224,10 @@
 
 .bk-product {
   min-width: 280px;
-  flex: 0 0 auto;
+  flex: 0 0 38%;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 0px;
   overflow: hidden;
-  background: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -227,10 +251,11 @@
   top: 10px;
   left: 10px;
   font-size: 1.4rem;
-  font-family: 'CooperHewitt-Medium';
+  font-family: 'CooperHewittMedium', sans-serif !important;
   color: #fff;
   padding: 5px 14px;
   clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+  text-transform:uppercase;
 }
 .bk-quick {
   position: absolute;
@@ -240,24 +265,27 @@
   background: #FFD273;
   padding: 10px;
   font-size: 1.6rem;
-  font-family: 'CooperHewitt-Medium';
+  font-family: 'CooperHewittMedium', sans-serif !important;
   transform: translateY(100%);
   transition: transform 0.3s ease;
   opacity: 0;
+  color: #404041;
+  cursor:pointer;
 }
 .bk-img-wrap:hover .bk-quick {
   transform: translateY(0);
   opacity: 1;
 }
 .bk-prod-title {
-  font-size: 2.2rem;
-  font-family: 'CooperLTBT', serif;
+  font-size: 2.4rem;
+  font-family: 'CooperLTBTLight', sans-serif !important;
   margin-top: 15px;
+  margin:0;
 }
 .bk-price {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-family: 'Trebuchet MS';
-  margin: 5px 0 15px;
+  margin:0px;
 }
 
 .bk-arrow {
@@ -274,21 +302,855 @@
 }
 .bk-arrow.left { left: 10px; }
 .bk-arrow.right { right: 10px; }
+  
+/*!!!!!!!!!! Media Query starts here !!!!!!!!!!!!!!!!1  */
+/* ----------0998652--------- */
+@media only screen and (min-width: 1700px) and (max-width: 1910px) {
+  .bk-title {
+    font-size: 3.6rem !important;
+  }
 
-@media screen and (max-width: 768px) {
+  .bk-sub {
+    font-size: 1.6rem !important;
+  }
+
+  .bk-pill {
+    font-size: 1.3rem !important;
+    padding: 7px 20px !important;
+  }
+
   .bk-grid {
-    grid-template-columns: 1fr;
+    padding-top:1rem !important;
+    padding-left: 5rem !important;
+    gap: 25px !important;
   }
-  .bk-head {
-    flex-direction: column;
-    gap: 2rem;
+
+  .bk-product {
+    min-width: 200px !important;
   }
-  .bk-arrow.left, .bk-arrow.right {
-    top: auto;
-    bottom: -30px;
+.bk-image-box img {
+  object-fit: cover;
+  object-position:center;
+  border-radius: 0px;
+}
+  .bk-view-btn {
+  font-size: 1.3rem !important;
+  padding: 10px 22px !important;
+  color: #000;
+}
+  .bk-img-wrap img {
+  object-fit: cover;
+  object-position:center;  
+  transition: transform 0.3s ease;
+    border-radius:none;
+}
+  .bk-prod-title {
+    font-size: 2rem !important;
+    margin:1.2rem 0rem;
+  }
+
+  .bk-price {
+    font-size: 1.6rem !important;
+    margin-top:0rem;
+    margin-bottom:0.5rem;
+  }
+  .bk-badge {
+    font-size: 1.2rem !important;
+    padding: 4px 12px !important;
+  }
+
+  .bk-quick {
+    font-size: 1.3rem !important;
+  }
+  .bk-arrow {
+    font-size: 2rem !important;
+    padding: 6px 10px !important;
   }
 }
+/* @media only screen and (min-width:1600px) and (max-width:1699px) */
+/*  */
+@media only screen and (min-width:1600px) and (max-width:1699px){
+  .bk-title {
+    font-size: 3.4rem !important;
+  }
+
+  .bk-sub {
+    font-size: 1.4rem !important;
+  }
+
+  .bk-pill {
+    font-size: 1.2rem !important;
+    padding: 6px 18px !important;
+  }
+
+.bk-pills .bk-pill.red svg.icon,
+.bk-pills .bk-pill.green svg.icon,
+.bk-pills .bk-pill.blue svg.icon, 
+.bk-pills .bk-pill.yellow svg.icon{
+  height:11px;
+  width:16px;
+} 
+
+  
+  /*  */
+  .bk-grid {
+    grid-template-columns: 0.8fr 2fr;
+    gap: 20px;
+    padding: 1rem 0rem 2rem 5rem;
+  }
+
+  .bk-image-box img {
+    height:100%;
+    width:100%;
+    border-radius: 0px;
+    object-fit: cover;
+    object-position:center;
+  }
+
+  .bk-view-btn {
+    bottom: 4%;
+    left: 10%;
+    padding: 9px 19px !important;
+    font-size: 1.19rem !important;
+  }
+
+.bk-view-btn span.bk-view-btn-arrow svg{
+  height: 8px;
+  width: 16px;
+}
+  /*  */
+  .bk-slider-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+}
+  .bk-product {
+  min-width: 240px;
+  flex: 0 0 38%;
+  text-align: center;
+  border-radius: 0px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+ 
+  .bk-img-wrap img {
+    border-radius: 0px;
+    object-fit: cover;
+    object-position:center;
+  }
+
+  .bk-prod-title {
+    font-size: 1.9rem !important;
+  }
+
+  .bk-price {
+    font-size: 1.6rem !important;
+  }
+  .bk-badge {
+    font-size: 9px !important;
+    padding: 3px 10px !important;
+  }
+
+
+  .bk-quick {
+    font-size: 1.2rem !important;
+    padding: 8px !important;
+  }
+
+  .bk-arrow {
+    font-size: 2rem !important;
+    height: 38px;
+    width: 38px;
+    padding: 7px 9px;
+  }
+}
+
+/* @media only screen and (min-width:1400px) and (max-width:1599px) */
+/*  */
+@media only screen and (min-width:1400px) and (max-width:1599px) {
+  .bk-title {
+    font-size: 3.4rem !important;
+  }
+
+  .bk-sub {
+    font-size: 1.4rem !important;
+    margin:0.5rem 0rem !important;
+  }
+
+ .bk-pill {
+    font-size: 1.2rem !important;
+    padding: 6px 18px !important;
+  }
+
+.bk-pills .bk-pill.red svg.icon,
+.bk-pills .bk-pill.green svg.icon,
+.bk-pills .bk-pill.blue svg.icon, 
+.bk-pills .bk-pill.yellow svg.icon{
+  height:11px;
+  width:16px;
+} 
+  .bk-grid {
+    grid-template-columns: 0.8fr 2fr;
+    gap: 20px;
+    padding: 1rem 0rem 2rem 5rem;
+  }
+
+  .bk-image-box img {
+    height:100%;
+    width:100%;
+    border-radius: 0px;
+    object-fit: cover;
+    object-position:center;
+  }
+
+  .bk-view-btn {
+    bottom: 4%;
+    left: 10%;
+    padding: 9px 19px !important;
+    font-size: 1rem !important;
+  }
+
+  .bk-view-btn span.bk-view-btn-arrow svg{
+    height: 6px;
+    width: 16px;
+  }
+    /*  */
+  .bk-slider-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+}
+  .bk-product {
+  min-width: 240px;
+  flex: 0 0 38%;
+  text-align: center;
+  border-radius: 0px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+  .bk-img-wrap img {
+    border-radius: 0px;
+    object-fit: cover;
+    object-position:center;
+  }
+
+  .bk-prod-title {
+    font-size: 1.9rem !important;
+  }
+
+  .bk-price {
+    font-size: 1.6rem !important;
+  }
+  .bk-badge {
+    font-size: 9px !important;
+    padding: 3px 10px !important;
+  }
+
+  .bk-quick {
+    font-size: 1.2rem !important;
+    padding: 8px !important;
+  }
+
+  .bk-arrow {
+    font-size: 2rem !important;
+    height: 38px;
+    width: 38px;
+    padding: 7px 10px;
+
+  }
+}
+/*  */
+@media only screen and (min-width: 1190px) and (max-width: 1399px) {
+  .bk-title {
+    font-size: 3rem !important;
+    margin-bottom:0.6rem !important;
+  }
+
+  .bk-sub {
+    font-size: 1.3rem !important;
+  }
+
+  .bk-pill {
+    font-size: 1.1rem !important;
+    padding: 6px 16px !important;
+  }
+  .bk-pills .bk-pill.red svg.icon,
+  .bk-pills .bk-pill.green svg.icon,
+  .bk-pills .bk-pill.blue svg.icon, 
+  .bk-pills .bk-pill.yellow svg.icon{
+    height:8px;
+    width:16px;
+  } 
+
+  .bk-grid {
+    grid-template-columns: 0.8fr 2fr;
+    gap: 20px !important;
+    padding: 1rem 0rem 2rem 4rem !important;
+  }
+
+  .bk-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0px;
+    object-position: center;
+  }
+
+  .bk-view-btn {
+    bottom: 4%;
+    left: 8%;
+    padding: 8px 18px !important;
+    font-size: 1rem !important;
+  }
+
+  .bk-view-btn span.bk-view-btn-arrow svg{
+    height: 6px;
+    width: 16px;
+  }
+
+  .bk-product {
+    min-width: 220px !important;
+    max-width: 330px;
+    border-radius: 0px;
+  }
+
+  .bk-img-wrap img {
+    border-radius: 0px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .bk-prod-title {
+    font-size: 1.6rem !important;
+  }
+
+  .bk-price {
+    font-size: 1.5rem !important;
+  }
+
+  .bk-badge {
+    font-size: 0.8rem !important;
+    padding: 3px 9px !important;
+  }
+
+  .bk-quick {
+    font-size: 1.1rem !important;
+    padding: 7px !important;
+  }
+
+  .bk-arrow {
+    font-size: 1.6rem !important;
+    height: 34px;
+    width: 34px;
+    padding: 6px 10px !important;
+  }
+}
+/*  */
+@media only screen and (min-width: 990px) and (max-width: 1189px) {
+  .bk-section {
+    padding: 4rem 0rem;
+}
+  .bk-title {
+    font-size: 2.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .bk-sub {
+    font-size: 1.2rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  /*  */
+     /*Mobile View Button  */
+  /* .bk-pills.mobile-view-pills{
+    display:none;
+    margin:0 auto;
+  } */
+    /* .bk-pills.pills-none{
+      display:none;
+    } */
+  /*Mobile View Button  */
+  .bk-pill {
+    font-size: 0.9rem !important;
+    padding: 6px 14px !important;
+  }
+  .bk-pills .bk-pill.red svg.icon,
+  .bk-pills .bk-pill.green svg.icon,
+  .bk-pills .bk-pill.blue svg.icon, 
+  .bk-pills .bk-pill.yellow svg.icon{
+    height:7px;
+    width:16px;
+  } 
+
+  .bk-grid {
+    grid-template-columns: 0.8fr 2fr;
+    gap: 15px !important;
+    padding: 1rem 0rem 2rem 4rem !important;
+  }
+
+  .bk-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    object-position: center;
+  }
+
+   .bk-view-btn {
+    bottom: 4%;
+    left: 8%;
+    padding: 6px 14px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .bk-view-btn span.bk-view-btn-arrow svg{
+    height: 6px;
+    width: 16px;
+  }
+
+  
+    .bk-slider-container {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 10px;
+  }
+
+  .bk-product {
+    min-width: 200px !important;
+    /* max-width: 300px !important; */
+    border-radius: 0px !important;
+  }
+
+  .bk-img-wrap img {
+    border-radius: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .bk-prod-title {
+    font-size: 1.5rem !important;
+    margin-top: 1rem !important;
+  }
+
+  .bk-price {
+    font-size: 1.3rem !important;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .bk-badge {
+    font-size: 0.75rem !important;
+    padding: 2.5px 8px !important;
+  }
+
+  .bk-quick {
+    font-size: 1rem !important;
+    padding: 7px !important;
+  }
+
+  .bk-arrow {
+    font-size: 1.4rem !important;
+    height: 30px;
+    width: 30px;
+    padding: 5px 9px !important;
+  }
+}
+/*  */
+@media only screen and (min-width: 768px) and (max-width: 989px) {
+  .bk-section {
+    padding: 4rem 0;
+  }
+
+  .bk-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .bk-title {
+    font-size: 2rem !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .bk-sub {
+    font-size: 1rem !important;
+    margin-bottom: 1.5rem;
+  }
+
+  .bk-pills {
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top:0px;
+  }
+
+  .bk-pill {
+    font-size: 1rem !important;
+    padding: 6px 16px !important;
+    border-radius: 22px !important;
+  }
+  .bk-pills .bk-pill.red svg.icon,
+  .bk-pills .bk-pill.green svg.icon,
+  .bk-pills .bk-pill.blue svg.icon, 
+  .bk-pills .bk-pill.yellow svg.icon{
+    height:7px;
+    width:16px;
+    margin-left:0.2rem !important;
+  } 
+
+  .bk-grid {
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    padding: 2rem 0rem 0rem 2rem !important;
+  }
+ .bk-image-box img {
+    width:100%;
+    object-fit: cover;
+    border-radius: 0;
+    object-position: center;
+  }
+
+  .bk-view-btn {
+    bottom: 6%;
+    left: 6%;
+    padding: 9px 15px !important;
+    font-size: 0.99rem !important;
+    border-radius: 30px !important;
+  }
+    .bk-view-btn span.bk-view-btn-arrow svg{
+    height: 6.6px;
+    width: 16px;
+    margin-left:0rem !important;
+  }
+.bk-slider-container {
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+  .bk-product {
+    min-width: 240px !important;
+    max-width:190px !important
+  }
+
+  .bk-prod-title {
+    font-size: 1.4rem !important;
+    margin-top: 10px;
+  }
+
+  .bk-price {
+    font-size: 1.3rem !important;
+    margin-top:0.1rem;
+  }
+
+  .bk-badge {
+    font-size: 0.75rem !important;
+    padding: 3px 9px !important;
+  }
+
+  .bk-quick {
+    font-size: 1rem !important;
+    padding: 8px !important;
+  }
+
+  .bk-arrow {
+    font-size: 1.2rem !important;
+    padding: 0px 8px !important;
+    height: 26px;
+    width: 26px;
+  }
+}
+/* mobile view */
+/*  */
+@media only screen and (min-width: 460px) and (max-width: 767px) {
+  .bk-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .bk-title {
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  .bk-sub {
+    font-size: 1.3rem;
+    text-align: left;
+  }
+  /*Mobile View Button  */
+  .bk-pills.mobile-view-pills{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  }
+    .bk-pills.pills-none{
+      display:none;
+    }
+  /*Mobile View Button  */
+  .bk-pills {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+  }
+
+  .bk-pill {
+    font-size: 1rem;
+    padding: 6px 16px;
+  }
+  .bk-badge {
+    font-size: 0.7rem !important;
+    padding: 3px 9px !important;
+  }
+
+  .bk-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 2rem 15px;
+  }
+
+  .bk-left {
+    width: 100%;
+  }
+
+  .bk-image-box {
+    height: auto;
+    border-radius:0rem !important;
+  }
+
+  .bk-image-box img {
+    object-fit: cover;
+    border-radius:0rem !important;
+  }
+
+  .bk-view-btn {
+    bottom: 15px;
+    left: 10px;
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .bk-right {
+    width: 100%;
+  }
+
+  .bk-product {
+    min-width: 240px;
+    max-width:200px;
+  }
+
+  .bk-prod-title {
+    font-size: 1.3rem;
+  }
+
+  .bk-price {
+    font-size: 1.3rem;
+  }
+
+  .bk-quick {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  .bk-arrow {
+        top: 35%;
+        font-size: 1rem;
+        padding: 4px 8px;
+        height: 26px;
+        width: 26px
+  }
+}
+/*  */
+@media only screen and (min-width: 344px) and (max-width: 459px) {
+  .bk-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 1.5rem;
+  }
+ .bk-title {
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  .bk-sub {
+    font-size: 1.2rem;
+    text-align: left;
+  }
+
+  /*Mobile View Button  */
+  .bk-pills.mobile-view-pills{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  }
+    .bk-pills.pills-none{
+      display:none;
+    }
+  /*Mobile View Button  */
+  .bk-pill {
+    font-size: 1rem;
+    padding: 6px 16px;
+  }
+  .bk-left,
+  .bk-right {
+    width: 100%;
+  }
+
+  .bk-image-box img {
+    height: auto;
+    /* /* max-height: 300px; */
+    object-fit: cover; 
+    border-radius:0rem;
+  }
+
+  .bk-view-btn {
+    font-size: 0.9rem;
+    padding: 9px 19px;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .bk-slider-container {
+    gap: 15px;
+    padding-left: 0;
+    padding-right: 0rem;
+    padding-bottom: 1rem;
+  }
+
+  .bk-product {
+    min-width: 240px;
+    max-width:180px;
+  }
+
+  .bk-prod-title {
+    font-size: 1.3rem;
+    margin-top: 10px;
+  }
+
+  .bk-price {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .bk-quick {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  .bk-badge {
+    font-size: 0.8rem;
+    padding: 3px 9px;
+  }
+
+  .bk-arrow {
+    font-size: 1.2rem;
+    height: 25px;
+    width: 25px;
+    padding: 5px;
+    top: 45%;
+  }
+}
+/*  */
+@media only screen and (max-width:343px){
+   .bk-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 1.5rem;
+  }
+ .bk-title {
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  .bk-sub {
+    font-size: 1.2rem;
+    text-align: left;
+  }
+
+  /*Mobile View Button  */
+  .bk-pills.mobile-view-pills{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  }
+    .bk-pills.pills-none{
+      display:none;
+    }
+  /*Mobile View Button  */
+  .bk-pill {
+    font-size: 1rem;
+    padding: 6px 16px;
+  }
+  .bk-left,
+  .bk-right {
+    width: 100%;
+  }
+
+  .bk-image-box img {
+    height: auto;
+    /* /* max-height: 300px; */
+    object-fit: cover; 
+    border-radius:0rem;
+  }
+
+  .bk-view-btn {
+    font-size: 0.9rem;
+    padding: 9px 19px;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .bk-slider-container {
+    gap: 15px;
+    padding-left: 0;
+    padding-right: 0rem;
+    padding-bottom: 1rem;
+  }
+
+  .bk-product {
+    min-width: 240px;
+    max-width:180px;
+  }
+
+  .bk-prod-title {
+    font-size: 1.3rem;
+    margin-top: 10px;
+  }
+
+  .bk-price {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .bk-quick {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  .bk-badge {
+    font-size: 0.8rem;
+    padding: 3px 9px;
+  }
+
+  .bk-arrow {
+    font-size: 1.2rem;
+    height: 25px;
+    width: 25px;
+    padding: 5px;
+    top: 45%;
+  }
+}  
+
 </style>
+
+
 <script>
 function scrollProducts(direction) {
   const activeSlider = document.querySelector('.bk-slider-container:not([style*="display: none"])');
@@ -315,4 +1177,41 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+// 
+ function addToCart(variantId) {
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: variantId, quantity: 1 })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Product added to cart:', data);
+    alert("Product Added To Cart")
+    if (window.Shopify && Shopify.StorefrontExpressButtons) {
+      Shopify.StorefrontExpressButtons.refresh();
+    }
+    if (window.fetchEvent) {
+      window.fetchEvent();
+    }
+    const event = new CustomEvent('cart:refresh');
+    document.dispatchEvent(event);
+    // 
+        fetch('/cart.js')
+          .then(res => res.json())
+          .then(cart => {
+            const count = cart.item_count;
+            const cartCountEl = document.querySelector('.cart-count');
+            if (cartCountEl) {
+              cartCountEl.textContent = count;
+              cartCountEl.classList.add('cart-updated'); // Optional for visual feedback
+            }
+          });
+        // 
+  })
+  .catch(error => {
+    console.error('Error adding to cart:', error);
+  });
+} 
+  
 </script>
