@@ -1,0 +1,86 @@
+<div class="{{ cls }} section_title_container">
+    <div class="title_container">
+      {% liquid
+        assign heading_tag = heading_tag | default: 'h2'
+        assign subtitle_heading_tag = subheading_subtitle_heading_tag | default: 'h3'
+      %}
+      <!--Sub Heading  -->
+      <{{ subtitle_heading_tag }} class="custom-subheading_{{ cls }}">
+        {{ subheading }}
+      </{{ subtitle_heading_tag }}>
+        <!-- Main Heading -->
+      <{{ heading_tag }} class="custom-heading_{{ cls }}">
+        {{ heading }}
+      </{{ heading_tag }}>
+        <!--Description Section  -->
+      <p class="desc desc_{{ cls }}">{{ sec_desc }}</p>
+    </div>
+  </div>
+  
+  {% style %}
+     .{{ cls }}.section_title_container {
+       margin-bottom: 24px;
+       display: flex;
+       flex-direction: column;
+       align-items:{{heading_sec_align}};
+       gap: 8px;
+     }
+      
+    .{{ cls }}.section_title_container  .title_container{
+       display: flex;
+       flex-direction: {% if reverse %} column-reverse {% else %} column {% endif %};
+    }
+  
+     .{{ cls }}.section_title_container .custom-heading_{{ cls }} {
+    {% comment %}
+       text-align: {{ text_align }};
+    {% endcomment %}  
+       text-align: {{heading_sec_align}};
+       font-size: {{ font_size_desktop | minus: 8 | at_least: 24 }}px;
+       color: {{ font_color }};
+       margin: 0;
+     }
+  
+     .{{ cls }}.section_title_container .custom-subheading_{{ cls }} {
+       text-align: {{heading_sec_align}};
+       font-size: {{ subheading_font_size_desktop | minus: 8 | at_least: 18 }}px;
+       color: {{ subheading_font_color }};
+       margin: 0;
+     }
+  
+     .{{ cls }}.section_title_container .desc_{{ cls }} {
+       text-align: {{heading_sec_align}};
+       font-size: {{ sec_desc_font_size_desktop | minus: 8 | at_least: 16 }}px;
+       color: {{ sec_desc_font_color }};
+       margin: 0;
+     }
+  
+     @media only screen and (min-width: 768px) {
+       .{{ cls }}.section_title_container .custom-heading_{{ cls }} {
+         font-size: {{ font_size_desktop | minus: 4 | at_least: 18 }}px;
+       }
+  
+       .{{ cls }}.section_title_container .custom-subheading_{{ cls }} {
+         font-size: {{ subheading_font_size_desktop | minus: 4 | at_least: 16 }}px;
+       }
+  
+       .{{ cls }}.section_title_container .desc_{{ cls }} {
+         font-size: {{ sec_desc_font_size_desktop | minus: 4 | at_least: 16 }}px;
+       }
+     }
+  
+     @media only screen and (min-width: 992px) {
+       .{{ cls }}.section_title_container .custom-heading_{{ cls }} {
+         font-size: {{ font_size_desktop | at_least: 24 }}px;
+       }
+  
+       .{{ cls }}.section_title_container .custom-subheading_{{ cls }} {
+         font-size: {{ subheading_font_size_desktop | at_least: 20 }}px;
+       }
+  
+       .{{ cls }}.section_title_container .desc_{{ cls }} {
+         font-size: {{ sec_desc_font_size_desktop | minus: 8 | at_least: 18 }}px;
+       }
+     }
+  {% endstyle %}
+  
