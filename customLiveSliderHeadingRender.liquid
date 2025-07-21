@@ -38,7 +38,7 @@
        text-align: {{heading_sec_align}};
        font-size: {{ font_size_desktop | minus: 8 | at_least: 24 }}px;
        color: {{ font_color }};
-       margin: 0;
+       margin: 1.4rem 0rem;
      }
   
      .{{ cls }}.section_title_container .custom-subheading_{{ cls }} {
@@ -54,18 +54,30 @@
        color: {{ sec_desc_font_color }};
        margin: 0;
      }
-  
-     @media only screen and (min-width: 768px) {
+     @media only screen and (max-width: 768px) {
        .{{ cls }}.section_title_container .custom-heading_{{ cls }} {
-         font-size: {{ font_size_desktop | minus: 4 | at_least: 18 }}px;
+         font-size: {{ font_size_desktop | minus:14 | at_least: 18 }}px;
        }
   
        .{{ cls }}.section_title_container .custom-subheading_{{ cls }} {
-         font-size: {{ subheading_font_size_desktop | minus: 4 | at_least: 16 }}px;
+         font-size: {{ subheading_font_size_desktop | minus: 12 | at_least: 16 }}px;
        }
   
        .{{ cls }}.section_title_container .desc_{{ cls }} {
-         font-size: {{ sec_desc_font_size_desktop | minus: 4 | at_least: 16 }}px;
+         font-size: {{ sec_desc_font_size_desktop | minus: 12 | at_least: 16 }}px;
+       }
+     }
+     @media only screen and (min-width: 768px) {
+       .{{ cls }}.section_title_container .custom-heading_{{ cls }} {
+         font-size: {{ font_size_desktop | minus: 5 | at_least: 18 }}px;
+       }
+  
+       .{{ cls }}.section_title_container .custom-subheading_{{ cls }} {
+         font-size: {{ subheading_font_size_desktop | minus: 5 | at_least: 16 }}px;
+       }
+  
+       .{{ cls }}.section_title_container .desc_{{ cls }} {
+         font-size: {{ sec_desc_font_size_desktop | minus: 5 | at_least: 16 }}px;
        }
      }
   
