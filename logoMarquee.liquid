@@ -1,0 +1,236 @@
+{% style %}
+  .blocksy-image_{{ section.id }} {
+    background:var(--background-color);
+    padding-top:var(--padding-top);
+    padding-bottom:var(--padding-bottom);
+  }
+
+  .blocksy-logo-slider {
+    display: flex;
+    justify-content: var(--marquee-alignment);
+    align-items: center;
+    gap: var(--marquee-column-gap);
+  }
+  .blocksy-logo-slider-wrapper {
+    text-align: center;
+  }
+  .blocksy-logo-slider-wrapper img {
+    height: var(--marquee-logo-height);
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+  .blocksy-logo-slider-wrapper svg.placeholder-img {
+    height: var(--marquee-logo-height);
+    width: 100%;
+    max-width: 100%;
+  }
+{% endstyle %}
+
+<section
+  class="blocksy-image_{{ section.id }} blocksy_image_marquee"
+  style="
+    --background-color: {{ section.settings.marquee-background_color }};
+    --padding-top: {{ section.settings.marquee_padding_top }}px;
+    --padding-bottom: {{ section.settings.marquee_padding_bottom }}px;
+    --marquee-column-gap:{{ section.settings.marquee_column_gap }}px;
+    --marquee-alignment:{{ section.settings.logo-list-alignment}};
+    --marquee-logo-height:{{ section.settings.marquee_image_height }}px
+  "
+>
+  <div class="{% unless section.settings.blocksy_marquee_layout == 'full' %}page-width{% endunless %}">
+    <div class="blocksy-logo-slider">
+      {% for block in section.blocks %}
+        {% if block.settings.marquee_logo_image != blank %}
+          <div class="blocksy-logo-slider-wrapper">
+            {% if block.settings.logo_list_link != blank %}
+              <a
+                {% if block.settings.open_new_tab %}
+                  target="_blank"
+                {% endif %}
+                href="{{ block.settings.logo_list_link }}"
+              >
+                {{ block.settings.marquee_logo_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+              </a>
+            {% else %}
+              <a href="#">
+                {{ block.settings.marquee_logo_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+              </a>
+            {% endif %}
+          </div>
+        {% else %}
+          <!-- Place holder -->
+          <div class="blocksy-logo-slider-wrapper">
+            {% assign placeholder_index = forloop.index | modulo: 2 %}
+            {% if placeholder_index == 1 %}
+              {% if block.settings.logo_list_link != blank %}
+                <a
+                  {% if block.settings.open_new_tab %}
+                    target="_blank"
+                  {% endif %}
+                  href="{{ block.settings.logo_list_link }}"
+                >
+                  {{ 'product-2' | placeholder_svg_tag: 'placeholder-img' }}
+                </a>
+              {% else %}
+                <a href="#">
+                  {{ 'product-2' | placeholder_svg_tag: 'placeholder-img' }}
+                </a>
+              {% endif %}
+            {% else %}
+              {% if block.settings.link != blank %}
+                <a
+                  {% if block.settings.open_new_tab %}
+                    targer="_blank"
+                  {% endif %}
+                  href="{{ block.settings.logo_list_link }}"
+                >
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-img' }}
+                </a>
+              {% else %}
+                <a href="#">
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-img' }}
+                </a>
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blocksy • Logo List",
+  "settings": [
+    {
+      "type": "color",
+      "id": "marquee-background_color",
+      "label": "Background color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "select",
+      "id": "blocksy_marquee_layout",
+      "label": "Layout",
+      "default": "page",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page Width"
+        },
+        {
+          "value": "full",
+          "label": "Full Width"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "logo-list-alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Start" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "End" },
+        { "value": "space-between", "label": "Space between" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "marquee_image_height",
+      "min": 20,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Image height",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "marquee_padding_top",
+      "min": 2,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "marquee_padding_bottom",
+      "min": 2,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "marquee_column_gap",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap",
+      "default": 40
+    },
+
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "marquee_logo_image",
+          "label": "Logo image"
+        },
+        {
+          "type": "url",
+          "id": "logo_list_link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Open link in new tab"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Blocksy • Logo List",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
