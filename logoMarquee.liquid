@@ -1,32 +1,56 @@
 {% style %}
-  .blocksy-image_{{ section.id }} {
-    background:var(--background-color);
-    padding-top:var(--padding-top);
-    padding-bottom:var(--padding-bottom);
-  }
+    .blocksy-image_{{ section.id }} {
+      background:var(--background-color);
+      padding-top:var(--padding-top);
+      padding-bottom:var(--padding-bottom);
+    }
 
-  .blocksy-logo-slider {
-    display: flex;
-    justify-content: var(--marquee-alignment);
-    align-items: center;
-    gap: var(--marquee-column-gap);
-  }
-  .blocksy-logo-slider-wrapper {
-    text-align: center;
-  }
-  .blocksy-logo-slider-wrapper img {
-    height: var(--marquee-logo-height);
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-  }
-  .blocksy-logo-slider-wrapper svg.placeholder-img {
-    height: var(--marquee-logo-height);
-    width: 100%;
-    max-width: 100%;
-  }
+    .blocksy-logo-slider {
+      display: flex;
+      justify-content: var(--marquee-alignment);
+      align-items: center;
+      gap: var(--marquee-column-gap);
+      overflow: hidden;
+      position: relative;
+    }
+  
+    .blocksy-logo-slider-wrapper-outer {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .blocksy-logo-slider.marquee-enabled {
+      display: flex;
+      animation: scroll 20s linear infinite;
+    }
+  
+    .blocksy-logo-slider-wrapper {
+      text-align: center;
+    }
+  
+    .blocksy-logo-slider-wrapper img {
+      height: var(--marquee-logo-height);
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+  
+    .blocksy-logo-slider-wrapper svg.placeholder-img {
+      height: var(--marquee-logo-height);
+      width: 100%;
+      max-width: 100%;
+    }
+    /* Animation */
+    @keyframes scroll {
+      0% {
+        transform: translateX(50%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
 {% endstyle %}
 
 <section
@@ -41,30 +65,11 @@
   "
 >
   <div class="{% unless section.settings.blocksy_marquee_layout == 'full' %}page-width{% endunless %}">
-    <div class="blocksy-logo-slider">
-      {% for block in section.blocks %}
-        {% if block.settings.marquee_logo_image != blank %}
-          <div class="blocksy-logo-slider-wrapper">
-            {% if block.settings.logo_list_link != blank %}
-              <a
-                {% if block.settings.open_new_tab %}
-                  target="_blank"
-                {% endif %}
-                href="{{ block.settings.logo_list_link }}"
-              >
-                {{ block.settings.marquee_logo_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
-              </a>
-            {% else %}
-              <a href="#">
-                {{ block.settings.marquee_logo_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
-              </a>
-            {% endif %}
-          </div>
-        {% else %}
-          <!-- Place holder -->
-          <div class="blocksy-logo-slider-wrapper">
-            {% assign placeholder_index = forloop.index | modulo: 2 %}
-            {% if placeholder_index == 1 %}
+    <div class="blocksy-logo-slider-wrapper-outer {% if section.settings.enable_scroll_animation %}marquee-wrapper{% endif %}">
+      <div class="blocksy-logo-slider {% if section.settings.logo_list_animation %}marquee-enabled{% endif %}">
+        {% for block in section.blocks %}
+          {% if block.settings.marquee_logo_image != blank %}
+            <div class="blocksy-logo-slider-wrapper">
               {% if block.settings.logo_list_link != blank %}
                 <a
                   {% if block.settings.open_new_tab %}
@@ -72,32 +77,53 @@
                   {% endif %}
                   href="{{ block.settings.logo_list_link }}"
                 >
-                  {{ 'product-2' | placeholder_svg_tag: 'placeholder-img' }}
+                  {{ block.settings.marquee_logo_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
                 </a>
               {% else %}
                 <a href="#">
-                  {{ 'product-2' | placeholder_svg_tag: 'placeholder-img' }}
+                  {{ block.settings.marquee_logo_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
                 </a>
               {% endif %}
-            {% else %}
-              {% if block.settings.link != blank %}
-                <a
-                  {% if block.settings.open_new_tab %}
-                    targer="_blank"
-                  {% endif %}
-                  href="{{ block.settings.logo_list_link }}"
-                >
-                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-img' }}
-                </a>
+            </div>
+          {% else %}
+            <!-- Place holder -->
+            <div class="blocksy-logo-slider-wrapper">
+              {% assign placeholder_index = forloop.index | modulo: 2 %}
+              {% if placeholder_index == 1 %}
+                {% if block.settings.logo_list_link != blank %}
+                  <a
+                    {% if block.settings.open_new_tab %}
+                      target="_blank"
+                    {% endif %}
+                    href="{{ block.settings.logo_list_link }}"
+                  >
+                    {{ 'product-2' | placeholder_svg_tag: 'placeholder-img' }}
+                  </a>
+                {% else %}
+                  <a href="#">
+                    {{ 'product-2' | placeholder_svg_tag: 'placeholder-img' }}
+                  </a>
+                {% endif %}
               {% else %}
-                <a href="#">
-                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-img' }}
-                </a>
+                {% if block.settings.link != blank %}
+                  <a
+                    {% if block.settings.open_new_tab %}
+                      targer="_blank"
+                    {% endif %}
+                    href="{{ block.settings.logo_list_link }}"
+                  >
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-img' }}
+                  </a>
+                {% else %}
+                  <a href="#">
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-img' }}
+                  </a>
+                {% endif %}
               {% endif %}
-            {% endif %}
-          </div>
-        {% endif %}
-      {% endfor %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>
@@ -180,6 +206,12 @@
       "label": "Gap",
       "default": 40
     },
+    {
+      "type": "checkbox",
+      "id": "logo_list_animation",
+      "label": "Enable scroll animation",
+      "default": true
+    }
 
   ],
   "blocks": [
