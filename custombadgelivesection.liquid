@@ -1,0 +1,280 @@
+{% style %}
+  .blocksy-feature-grid {
+    background-color: {{ section.settings.blocksy-trust-section_bg }};
+    padding-top:{{section.settings.blocksy-trust-padding-top}}px;
+    padding-bottom:{{section.settings.blocksy-trust-padding-bottom}}px;
+  }
+  .blocksy-feature-grid .blocksy-feature-grid-sub-heading{
+    text-align: center;
+    font-size: {{ section.settings.blocksy-trust-subheading_font_size }}px;
+    color: {{ section.settings.blocksy-trust-subheading_font_color}};
+    font-weight: 400;
+  }
+  .blocksy-feature-grid .blocksy-feature-grid-heading{
+    text-align: center;
+    font-size: {{ section.settings.blocksy-trust-heading_font_size }}px;
+    color: {{ section.settings.blocksy-trust-heading_color }};
+    font-weight: 600;
+    text-transform:capitalize;
+    margin-bottom: 40px;
+  }
+  .blocksy-feature-grid .blocksy-feature-grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    margin: 0 auto;
+  }
+  .blocksy-feature-grid .blocksy-feature-grid-block {
+    background-color: {{ section.settings.blocksy-trust-block_bg }};
+    border-radius: {{ section.settings.block-trust-block_radius }}px;
+    text-align:var(--blocksy-trust-badge-alignment);
+  }
+  .blocksy-feature-grid .blocksy-feature-grid-block img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+  }
+  .blocksy-feature-grid .blocksy-feature-grid-block .blocksy_block_title {
+    font-size: var(--block-title-font);
+    color: var(--block-title-color);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .blocksy-feature-grid .blocksy-feature-grid-block .blocksy_block_description {
+    font-size: var(--block-desc-font);
+    color: var(--block-desc-color);
+    line-height: 1.6;
+  }
+{% endstyle %}
+
+<div class="blocksy-feature-grid" style="--blocksy-trust-badge-alignment:{{ section.settings.blocksy-trust-alignment }};">
+  <p class="blocksy-feature-grid-sub-heading">{{ section.settings['blocksy-trust-subheading'] }}</p>
+  <h2 class="blocksy-feature-grid-heading">{{ section.settings['blocksy-trust-heading'] }}</h2>
+  <div class="page-width">
+    <div class="blocksy-feature-grid-wrapper">
+      {% for block in section.blocks %}
+        <div
+          class="blocksy-feature-grid-block"
+          style="
+            --block-title-font: {{ block.settings.blocksy-trust-block-title }}px;
+            --block-title-color: {{ block.settings.blocksy-trust-heading_color}};
+            --block-desc-font: {{ block.settings.blocksy-trust-description_font_size }}px;
+            --block-desc-color: {{ block.settings.blocksy-trust-desc_color }};
+          "
+        >
+          {% if block.settings['blocksy-trust-icon'] %}
+            <div class="blcoksy-trust-block-img-div">
+              <img src="{{ block.settings.blocksy-trust-icon | image_url: width: 80 }}" alt="Icon">
+            </div>
+          {% else %}
+            <div class="blcoksy-trust-block-img-div">
+              {% assign placeholder_index = forloop.index | modulo: 2 %}
+              {% if placeholder_index == 1 %}
+                {{ 'product-2' | placeholder_svg_tag: 'placeholder-img' }}
+              {% else %}
+                {{ 'product-2' | placeholder_svg_tag: 'placeholder-img' }}
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <h3 class="blocksy_block_title">{{ block.settings['blocksy-trust-block-title'] }}</h3>
+          <p class="blocky_block_description">{{ block.settings['blocksy-trust-block-description'] }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Blocksy • Trust Badges",
+  "tag": "section",
+  "class": "blocksy-feature-grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Setting"
+    },
+    {
+      "type": "color",
+      "id": "blocksy-trust-section_bg",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "blocksy-trust-block-gap",
+      "label": "Gap",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default":40
+    },
+    {
+      "type": "select",
+      "id": "blocksy-trust-alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "start", "label": "Start" },
+        { "value": "center", "label": "Center" },
+        { "value": "end", "label": "End" },
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Sub heading"
+    },
+    {
+      "type": "text",
+      "id": "blocksy-trust-subheading",
+      "label": "Section Heading",
+      "default": "sub heading"
+    },
+    {
+      "type": "number",
+      "id": "blocksy-trust-subheading_font_size",
+      "label": "Font Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "blocksy-trust-subheading_font_color",
+      "label": "Font Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "blocksy-trust-heading",
+      "label": "Heading",
+      "default": "Why shop with Blocksy?"
+    },
+    {
+      "type": "number",
+      "id": "blocksy-trust-heading_font_size",
+      "label": "Font Size",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "blocksy-trust-heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Block Setting"
+    },
+    {
+      "type": "color",
+      "id": "blocksy-trust-block_bg",
+      "label": "Block Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "block-trust-block_radius",
+      "label": "Block Border Radius (px)",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "blocksy-trust-padding-top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "blocksy-trust-padding-bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "blocksy-trust-icon",
+          "label": "Icon/Image"
+        },
+        {
+          "type": "header",
+          "content": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "blocksy-trust-block-title",
+          "label": "Title",
+          "default": "Free Shipping Over $99"
+        },
+        {
+          "type": "number",
+          "id": "trust-block-heading_font_size",
+          "label": "Font Size",
+          "default": 20
+        },
+        {
+          "type": "color",
+          "id": "trust-block-title_color",
+          "label": "Title Color",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Description"
+        },
+        {
+          "type": "textarea",
+          "id": "blocksy-trust-block-description",
+          "label": "Description",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut."
+        },
+        {
+          "type": "number",
+          "id": "blocksy-trust-description_font_size",
+          "label": "Font Size",
+          "default": 16
+        },
+        {
+          "type": "color",
+          "id": "trust-block-desc_color",
+          "label": "Description Color",
+          "default": "#444444"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blocksy • Trust Badges",
+      "category": "Custom",
+      "blocks": [
+        { "type": "feature" },
+        { "type": "feature" },
+        { "type": "feature" },
+        { "type": "feature" }
+      ]
+    }
+  ]
+}
+{% endschema %}
