@@ -1,0 +1,419 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<style>
+  .man-announcement-bar-{{ section.id }} {
+    width: 100%;
+    background-color: {{ section.settings.announcement_bar_bg_color }};
+    padding:1rem 0rem;
+  }
+  .man-announcement-bar-inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .man-announcement-bar-{{ section.id }} .left-icons {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .man-announcement-bar-{{ section.id }} .left-icons a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .man-announcement-bar-{{ section.id }} .center-slider {
+   overflow:hidden;
+   max-width:50%;
+   color:#fff;
+  }
+  .man-announcement-bar-{{ section.id }} .center-slider .announcement-slider-text{
+   font-size:{{ section.settings.announcement_bar_text_size }}px;
+   font-weight:400;
+   color:{{ section.settings.announcement_bar_text_color }};
+  }
+
+  .blocksy-announcment-next-btn-{{ section.id }}, .blocksy-announcment-prev-btn-{{ section.id }} {
+     color:{{ section.settings.announcement_slider_arrows-color }} !important;
+     display:flex !important;
+  }
+  .blocksy-announcment-prev-btn-{{ section.id }}:after, .blocksy-announcment-next-btn-{{ section.id }}:after {
+    font-family: swiper-icons;
+    font-size:10px !important;
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1;
+    color:{{  section.settings.announcement_slider_arrows-color }};
+  }
+  .man-announcement-bar-{{ section.id }} .swiper {
+    width: 100%;
+    text-align: center;
+  }
+  .man-announcement-bar-{{ section.id }} .right-selectors {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .man-announcement-bar-{{ section.id }} select {
+    background: transparent;
+    border: none;
+    color: {{section.settings.announcement_bar_text_color}};
+    font-size: {{section.settings.country_and_language_size}}px;
+    cursor: pointer;
+  }
+  .man-announcement-bar-{{ section.id }} select option{
+    color:black;
+  }
+  .left-icons a svg{
+    height:16px;
+    width:16px;
+  }
+  .man-announcement-bar-{{ section.id }} select:focus-visible {
+    outline: none;
+    outline-offset: 0;
+    box-shadow: none;
+  }
+  @media screen and (max-width:990px){
+    .man-announcement-bar-{{ section.id }} .left-icons{
+      display:none;
+    }
+    .man-announcement-bar-{{ section.id }} .right-selectors{
+      display:none;
+    }
+    .man-announcement-bar-{{ section.id }} .center-slider{
+      max-width:100%;
+    }
+  }
+</style>
+
+<div class="man-announcement-bar-{{ section.id }}">
+  <div class="page-width container">
+    <div class="man-announcement-bar-inner">
+      <!-- Left: Social Icons -->
+      <div class="left-icons">
+        {% if section.settings['blocksy-facebook_link'] != blank %}
+          <a href="{{ section.settings.blocksy-facebook_link }}" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 8 16" fill="none">
+              <path d="M2 15.4667V9.6H0.5C0.22 9.6 0 9.36533 0 9.06667V6.93333C0 6.63467 0.22 6.4 0.5 6.4H2V3.73333C2 1.67467 3.57 0 5.5 0H7.5C7.78 0 8 0.234667 8 0.533333V2.66667C8 2.96533 7.78 3.2 7.5 3.2H5.5C5.23 3.2 5 3.44533 5 3.73333V6.4H7.41C7.72 6.4 7.95 6.69867 7.9 7.01867L7.57 9.152C7.53 9.408 7.32 9.6 7.08 9.6H5V15.4667C5 15.7653 4.78 16 4.5 16H2.5C2.22 16 2 15.7653 2 15.4667Z" fill="{{ section.settings.announcement_icon_color }}"/>
+            </svg>
+          </a>
+        {% endif %}
+        {% if section.settings['blocksy-instagram_link'] != blank %}
+          <a href="{{ section.settings.blocksy-instagram_link }}" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M13.9277 0H2.08116C0.933852 0 0 0.933852 0 2.08116V13.9188C0 15.0661 0.933852 16 2.08116 16H13.9188C15.0661 16 16 15.0661 16 13.9188V2.08116C16 0.933852 15.0661 0 13.9188 0H13.9277ZM7.55976 11.562C5.35409 11.562 3.55753 9.76543 3.55753 7.55976C3.55753 5.35409 5.35409 3.55753 7.55976 3.55753C9.76543 3.55753 11.562 5.35409 11.562 7.55976C11.562 9.76543 9.76543 11.562 7.55976 11.562ZM12.8961 4.44692C12.1579 4.44692 11.562 3.85103 11.562 3.11284C11.562 2.37465 12.1579 1.77877 12.8961 1.77877C13.6342 1.77877 14.2301 2.37465 14.2301 3.11284C14.2301 3.85103 13.6342 4.44692 12.8961 4.44692ZM9.79211 7.55976C9.79211 8.90272 8.90272 9.79211 7.55976 9.79211C6.21679 9.79211 5.3274 8.90272 5.3274 7.55976C5.3274 6.21679 6.21679 5.3274 7.55976 5.3274C8.90272 5.3274 9.79211 6.21679 9.79211 7.55976Z" fill="{{ section.settings.announcement_icon_color }}"/>
+            </svg>
+          </a>
+        {% endif %}
+        {% if section.settings['blocksy-tiktok_link'] != blank %}
+          <a href="{{ section.settings.blocksy-tiktok_link }}" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 14 16" fill="none">
+              <path d="M14 4.00889C13.088 4.00889 12.2468 3.70667 11.5738 3.19111C10.8035 2.60444 10.2456 1.74222 10.0508 0.755556C10.0066 0.506667 9.97999 0.257778 9.97114 0H7.36787V11.0489C7.36787 12.0978 6.68607 12.9778 5.74748 13.2889C5.47298 13.3778 5.18078 13.4222 4.87087 13.4044C4.48126 13.3867 4.10937 13.2622 3.7906 13.0756C3.10879 12.6667 2.64835 11.9289 2.6395 11.0844C2.62179 9.76 3.68434 8.68445 5.00369 8.68445C5.26047 8.68445 5.5084 8.72889 5.74748 8.8V6.15111C5.49955 6.11556 5.25162 6.09778 4.99483 6.09778C3.55152 6.09778 2.20562 6.70222 1.24932 7.77778C0.514383 8.59556 0.080506 9.64444 0.00966886 10.7378C-0.0788775 12.1778 0.443546 13.5467 1.46183 14.5511C1.61236 14.7022 1.77174 14.8356 1.93113 14.96C2.79888 15.6356 3.87029 16 4.98598 16C5.24276 16 5.49069 15.9822 5.73862 15.9467C6.78347 15.7867 7.75748 15.3067 8.51898 14.5511C9.45757 13.6178 9.97114 12.3822 9.97999 11.0667L9.96228 5.22667C10.4139 5.57333 10.9009 5.85778 11.4233 6.08C12.2379 6.42667 13.1057 6.60444 14 6.60444V4V4.00889Z" fill="{{ section.settings.announcement_icon_color }}"/>
+            </svg>
+          </a>
+        {% endif %}
+        {% if section.settings['blocksy-twitter_link'] != blank %}
+          <a href="{{ section.settings.blocksy-twitter_link }}" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 18" fill="none">
+              <path d="M7.4 10.6L2.6 17M15.4 1L10.6 7.4M17 17H12.7333L1 1H5.26667L17 17Z" stroke="{{ section.settings.announcement_icon_color }}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% endif %}
+        {% if section.settings['blocksy-youtube_link'] != blank %}
+          <a href="{{ section.settings.blocksy-youtube_link }}" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 12" fill="none">
+              <path d="M16 4.59636C16 4.26182 15.9709 3.83273 15.9272 3.31636C15.8836 2.8 15.8181 2.34182 15.7381 1.93455C15.6435 1.47636 15.4325 1.09091 15.1196 0.778182C14.7995 0.465455 14.4284 0.283636 14.0064 0.232727C12.6821 0.08 10.6885 0 8.01091 0C5.33333 0 3.33242 0.08 2.00819 0.232727C1.58618 0.283636 1.2151 0.465455 0.902228 0.778182C0.589359 1.09091 0.378354 1.47636 0.283765 1.93455C0.196453 2.34182 0.130969 2.8 0.0800364 3.31636C0.0363802 3.83273 0.00727603 4.25455 0.00727603 4.59636C0.00727603 4.93091 0 5.40364 0 6C0 6.59636 0 7.06909 0.00727603 7.40364C0.00727603 7.73818 0.0363802 8.16727 0.0800364 8.68364C0.123693 9.2 0.189177 9.65818 0.269213 10.0655C0.363802 10.5236 0.574807 10.9091 0.887676 11.2218C1.20782 11.5345 1.5789 11.7164 2.00091 11.7673C3.32515 11.9273 5.31878 12 7.99636 12C10.6739 12 12.6676 11.92 13.9918 11.7673C14.4138 11.7164 14.7849 11.5345 15.0978 11.2218C15.4106 10.9091 15.6216 10.5236 15.7162 10.0655C15.8035 9.65818 15.869 9.2 15.92 8.68364C15.9636 8.16727 15.9927 7.73818 15.9927 7.40364C15.9927 7.06909 16 6.59636 16 6C16 5.40364 16 4.93091 15.9927 4.59636H16ZM11.1687 6.50909L6.59209 9.51273C6.51205 9.57818 6.41019 9.60727 6.28649 9.60727C6.19918 9.60727 6.10459 9.58545 6.01 9.53455C5.81355 9.42545 5.71169 9.25091 5.71169 9.01091V2.99636C5.71169 2.75636 5.81355 2.58182 6.01 2.47273C6.21373 2.36364 6.40291 2.36364 6.59209 2.49455L11.1687 5.49818C11.3506 5.60727 11.4379 5.77455 11.4379 6.00727C11.4379 6.24 11.3506 6.40727 11.1687 6.51636V6.50909Z" fill="{{ section.settings.announcement_icon_color }}"/>
+            </svg>
+          </a>
+        {% endif %}
+        {% if section.settings['blocksy-snapchat'] != blank %}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="16"
+            height="16"
+            viewBox="0 -0.5 20 20"
+            version="1.1"
+          >
+                <title>snapchat [#136]</title>
+                <desc>Created with Sketch.</desc>
+                <defs>
+
+            </defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Dribbble-Light-Preview" transform="translate(-380.000000, -7560.000000)" fill="{{ section.settings.announcement_icon_color }}">
+                        <g id="icons" transform="translate(56.000000, 160.000000)">
+                            <path d="M334.125531,7419 C332.838531,7419 332.277531,7418.71061 331.183531,7417.92743 C330.193531,7417.21913 329.558531,7416.82957 327.720531,7417.19283 C327.003531,7417.33449 327.017531,7417.26973 326.863531,7416.55333 C326.781531,7416.17591 326.722531,7415.94622 326.582531,7415.92396 C325.089531,7415.69123 324.206531,7415.3472 324.030531,7414.93133 C323.946531,7414.73098 324.046531,7414.57313 324.200531,7414.54682 C326.147531,7414.22303 327.721531,7412.58888 328.404531,7410.97902 C328.406531,7410.97497 328.407531,7410.97092 328.409531,7410.96789 C328.582531,7410.61374 328.616531,7410.30816 328.512531,7410.05924 C328.277531,7409.49867 327.520531,7409.3813 326.977531,7409.16274 C326.603531,7409.01298 325.988531,7408.69728 326.070531,7408.26219 C326.145531,7407.86352 326.784531,7407.61055 327.126531,7407.77245 C327.985531,7408.18023 328.673531,7408.05577 328.879531,7407.86352 C328.869531,7407.66823 328.999531,7407.45675 328.999531,7407.25843 C328.999531,7405.87927 328.651531,7404.16316 329.085531,7403.17963 C330.958531,7398.92984 337.206531,7398.95109 339.069531,7403.17761 C339.503531,7404.16215 339.396531,7405.87927 339.310531,7407.26045 L339.306531,7407.32622 C339.294531,7407.51341 339.283531,7407.69049 339.274531,7407.8625 C339.314531,7407.89994 339.475531,7408.02946 339.804531,7408.04261 C340.083531,7408.03148 340.405531,7407.94042 340.759531,7407.77245 C341.176531,7407.57514 341.927531,7407.87768 341.935531,7408.33099 C341.939531,7408.54247 341.784531,7408.85817 341.021531,7409.16274 C340.480531,7409.37927 339.721531,7409.49867 339.487531,7410.05924 C339.382531,7410.30816 339.416531,7410.61374 339.589531,7410.96688 C339.591531,7410.97092 339.592531,7410.97497 339.594531,7410.97902 C339.647531,7411.1055 340.932531,7414.06923 343.798531,7414.54682 C343.919531,7414.56706 344.006531,7414.67634 343.999531,7414.79979 C343.996531,7414.84431 343.986531,7414.88883 343.967531,7414.93234 C343.792531,7415.34619 342.910531,7415.68921 341.416531,7415.92193 C341.276531,7415.9442 341.217531,7416.17389 341.136531,7416.54929 C341.013531,7417.11997 341.032531,7417.31627 340.278531,7417.16652 C338.460531,7416.80832 337.771531,7417.24139 336.816531,7417.9244 C336.112531,7418.4283 335.316531,7419 334.125531,7419" id="snapchat-[#136]">
+
+            </path>
+                        </g>
+                    </g>
+                </g>
+          </svg>
+        {% endif %}
+        {% if section.settings['blocksy-pinterest'] != blank %}
+          <a href="{{ section.settings.blocksy-pinterest }}" target="_blank">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="{{ section.settings.announcement_icon_color }}"
+              width="16"
+              height="16"
+              viewBox="0 0 32 32"
+              version="1.1"
+            >
+              <title>pinterest</title>
+              <path d="M16.021 1.004c-0 0-0.001 0-0.002 0-8.273 0-14.979 6.706-14.979 14.979 0 6.308 3.899 11.705 9.419 13.913l0.101 0.036c-0.087-0.595-0.137-1.281-0.137-1.979 0-0.819 0.068-1.622 0.2-2.403l-0.012 0.084c0.274-1.171 1.757-7.444 1.757-7.444-0.284-0.636-0.449-1.379-0.449-2.16 0-0.023 0-0.046 0-0.069l-0 0.004c0-2.078 1.208-3.638 2.709-3.638 0.008-0 0.018-0 0.028-0 1.040 0 1.883 0.843 1.883 1.883 0 0.080-0.005 0.159-0.015 0.236l0.001-0.009c-0.307 1.903-0.738 3.583-1.304 5.199l0.064-0.21c-0.042 0.161-0.067 0.345-0.067 0.535 0 1.2 0.973 2.173 2.173 2.173 0.039 0 0.078-0.001 0.117-0.003l-0.005 0c2.659 0 4.709-2.805 4.709-6.857 0.002-0.054 0.003-0.118 0.003-0.182 0-3.265-2.647-5.913-5.913-5.913-0.123 0-0.244 0.004-0.365 0.011l0.017-0.001c-0.083-0.004-0.18-0.006-0.277-0.006-3.58 0-6.482 2.902-6.482 6.482 0 0.007 0 0.014 0 0.022v-0.001c0 0 0 0.001 0 0.001 0 1.287 0.417 2.476 1.122 3.441l-0.011-0.016c0.076 0.081 0.122 0.191 0.122 0.311 0 0.043-0.006 0.084-0.017 0.123l0.001-0.003c-0.112 0.469-0.366 1.498-0.417 1.703-0.066 0.281-0.215 0.339-0.501 0.206-1.843-1.214-3.043-3.274-3.043-5.614 0-0.068 0.001-0.135 0.003-0.202l-0 0.010c0-4.719 3.434-9.062 9.897-9.062 0.132-0.007 0.287-0.011 0.442-0.011 4.811 0 8.72 3.862 8.795 8.655l0 0.007c0 5.167-3.258 9.325-7.789 9.325-0.039 0.001-0.086 0.002-0.132 0.002-1.366 0-2.573-0.677-3.306-1.713l-0.008-0.013-0.936 3.559c-0.488 1.499-1.123 2.8-1.91 3.992l0.038-0.061c1.325 0.425 2.85 0.671 4.432 0.671 8.274 0 14.981-6.707 14.981-14.981 0-8.272-6.705-14.978-14.977-14.981h-0z"/>
+            </svg>
+          </a>
+        {% endif %}
+        {% if section.settings['blocksy-Tumblr'] != blank %}
+          <a href="{{ section.settings.blocksy-Tumblr }}" target="_blank">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="{{ section.settings.announcement_icon_color }}"
+              width="16"
+              height="16"
+              viewBox="0 0 32 32"
+              version="1.1"
+            >
+              <title>tumblr</title>
+              <path d="M19.203 30.996c-0.194 0.016-0.42 0.026-0.647 0.026-4.459 0-8.081-3.586-8.139-8.032l-0-0.005v-9.8h-3.019v-3.873c3.33-1.296 5.687-4.391 5.885-8.061l0.001-0.023c0.006-0.118 0.099-0.213 0.215-0.224l0.001-0h4.395v7.64h6v4.54h-6.023v9.335c-0.014 0.103-0.022 0.222-0.022 0.342 0 1.45 1.175 2.625 2.625 2.625 0.055 0 0.109-0.002 0.162-0.005l-0.007 0h0.112c0.88-0.037 1.707-0.226 2.467-0.541l-0.048 0.018 1.445 4.28c-1.361 1.094-3.109 1.757-5.012 1.757-0.064 0-0.127-0.001-0.191-0.002l0.009 0h-0.222z"/>
+            </svg>
+          </a>
+        {% endif %}
+        {% if section.settings['blocksy-Vimeo'] != blank %}
+          <a href="{{ section.settings.blocksy-Vimeo }}" target="_blank">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="16"
+              height="16"
+              viewBox="0 -1.5 20 20"
+              version="1.1"
+            >
+                  <title>vimeo [#144]</title>
+                  <desc>Created with Sketch.</desc>
+                  <defs>
+
+              </defs>
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7560.000000)" fill="{{ section.settings.announcement_icon_color }}">
+                          <g id="icons" transform="translate(56.000000, 160.000000)">
+                              <path d="M23.99,7403.93262 C23.9,7405.8454 22.541,7408.46538 19.911,7411.79058 C17.192,7415.26353 14.891,7417 13.009,7417 C11.843,7417 10.857,7415.94019 10.051,7413.82155 L8.437,7407.99457 C7.839,7405.87495 7.197,7404.81514 6.51,7404.81514 C6.36,7404.81514 5.837,7405.12441 4.941,7405.74296 L4,7404.55117 C4.986,7403.69722 5.957,7402.84326 6.913,7401.99029 C8.228,7400.87138 9.214,7400.28337 9.871,7400.22427 C11.425,7400.07751 12.381,7401.12156 12.74,7403.35839 C13.128,7405.77251 13.397,7407.2726 13.547,7407.8616 C13.995,7409.86303 14.488,7410.86374 15.026,7410.86374 C15.444,7410.86374 16.072,7410.21662 16.908,7408.92141 C17.745,7407.6262 18.193,7406.64026 18.253,7405.96359 C18.372,7404.84469 17.924,7404.28622 16.908,7404.28622 C16.43,7404.28622 15.937,7404.38865 15.429,7404.59451 C16.415,7401.44561 18.298,7399.91499 21.077,7400.00364 C23.138,7400.06274 24.11,7401.37174 23.99,7403.93262 L23.99,7403.93262 Z" id="vimeo-[#144]">
+
+              </path>
+                          </g>
+                      </g>
+                  </g>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- Center: Announcement Slider -->
+      <div class="center-slider">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              <div class="swiper-slide">
+                <p class="announcement-slider-text">{{ block.settings.announcement_text }}</p>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-button-prev blocksy-announcment-prev-btn-{{ section.id }}"></div>
+          <div class="swiper-button-next blocksy-announcment-next-btn-{{ section.id }}"></div>
+        </div>
+      </div>
+
+      <!-- Right: Country & Language -->
+      <div class="right-selectors">
+        {% if section.settings.show_country_selector %}
+          {% form 'localization', id: 'CountrySelectorForm' %}
+            <div class="countryearcth" style="display:flex; justify-content:center; align-items:center; gap:2px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 17 17" fill="none">
+                <path d="M10.7454 12.9991L11.4953 11.4994L9.28467 10.0139L7.82769 9.9209L6.99609 10.7495L8.49581 12.9991H10.7454Z" stroke="{{section.settings.announcement_bar_text_color}}"/>
+                <path d="M9.17458 1.03139C8.07967 0.930857 6.97605 1.07251 5.94202 1.4463C4.90799 1.82009 3.96888 2.41686 3.19133 3.19426C2.41379 3.97167 1.81684 4.91066 1.44286 5.94463C1.06888 6.97859 0.927026 8.08219 1.02736 9.17712C1.3378 12.742 4.254 15.6582 7.81884 15.9686C8.91389 16.0692 10.0177 15.9275 11.0518 15.5536C12.086 15.1797 13.0251 14.5828 13.8027 13.8052C14.5803 13.0277 15.1772 12.0885 15.5511 11.0543C15.9249 10.0202 16.0666 8.91642 15.9661 7.82137C15.6556 4.25729 12.7394 1.34108 9.17458 1.02989V1.03139Z" stroke="{{ section.settings.announcement_bar_text_color }}"/>
+                <path d="M1.75 5.0957L5.31183 7.7502L6.19517 6.00753L9.70901 5.13019L10.7483 1.00146" stroke="{{ section.settings.announcement_bar_text_color }}"/>
+              </svg>
+              <select class="blocksy_announcement-country-selector" name="country_code" onchange="this.form.submit()">
+                {% for country in localization.available_countries %}
+                  <option
+                    value="{{ country.iso_code }}"
+                    {% if country.iso_code == localization.country.iso_code %}
+                      selected
+                    {% endif %}
+                  >
+                    {{ country.iso_code }} - {{ country.currency.iso_code | downcase }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endform %}
+        {% endif %}
+
+        {% if section.settings.show_language_selector %}
+          {% form 'localization', id: 'LanguageSelectorForm' %}
+            <select name="locale_code" onchange="this.form.submit()">
+              {% for language in localization.available_languages %}
+                <option
+                  value="{{ language.iso_code }}"
+                  {% if language.iso_code == localization.language.iso_code %}
+                    selected
+                  {% endif %}
+                >
+                  {{ language.endonym_name }}
+                </option>
+              {% endfor %}
+            </select>
+          {% endform %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.man-announcement-bar-{{ section.id }} .swiper', {
+      loop: true,
+      speed: 900,
+      autoplay: {
+        delay: 4000,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Blocksy • Announcement",
+  "settings": [
+    {
+      "type": "color",
+      "id": "announcement_bar_bg_color",
+      "label": "Background color"
+    },
+    {
+      "type": "number",
+      "id": "announcement_bar_text_size",
+      "label": "Slider text size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "announcement_bar_text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "number",
+      "id": "country_and_language_size",
+      "label": "Country & Language size",
+      "default": 14
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_selector",
+      "label": "Show Country Selector",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_language_selector",
+      "label": "Show Language Selector",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "announcement_icon_color",
+      "label": "Icon color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "color",
+      "id": "announcement_slider_arrows-color",
+      "label": "Arrow color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Social Icons"
+    },
+    {
+      "type": "text",
+      "id": "blocksy-facebook_link",
+      "label": "Facebook Link"
+    },
+    {
+      "type": "text",
+      "id": "blocksy-instagram_link",
+      "label": "Instagram Link"
+    },
+    {
+      "type": "text",
+      "id": "blocksy-tiktok_link",
+      "label": "TikTok Link"
+    },
+    {
+      "type": "text",
+      "id": "blocksy-twitter_link",
+      "label": "X / Twitter Link"
+    },
+    {
+      "type": "text",
+      "id": "blocksy-youtube_link",
+      "label": "YouTube Link"
+    },
+    {
+      "type": "text",
+      "id": "blocksy-snapchat",
+      "label": "Snapchat Link"
+    },
+    {
+      "type": "text",
+      "id": "blocksy-pinterest",
+      "label": "Pinterest Link"
+    },
+    {
+      "type": "text",
+      "id": "blocksy-Tumblr",
+      "label": "Tumblr Link"
+    },
+    {
+      "type": "text",
+      "id": "blocksy-Vimeo",
+      "label": "Vimeo Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "announcement_text",
+          "label": "Announcement Text",
+          "default": "Your announcement goes here"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blocksy • Announcement Bar"
+    }
+  ]
+}
+{% endschema %}
